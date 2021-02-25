@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>AI計畫-標註系統</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+	<style>
+	</style>
+  </head>
+  <body>
+	<div id="loading" style="display: none;height: 100%;width: 100%;position: fixed;z-index: 99999;top: 0;left: 0;background: #000;opacity: 0.6;text-align: center;">
+        <img style="position: relative;top: 40%;text-align: center;margin: 0 auto;" src="loading.gif">
+    </div>
+	<div class="container mainbg">
+		<div style="margin-top:10px;">
+			<div class="language_btn_group" id="language_btn_group">
+                <button type='button' class='btn btn-default language_version_btn' id='ZH' style='background-color: WhiteSmoke;'>CHINESE</button>
+                <button type='button' class='btn btn-default language_version_btn' id='EN' style='background-color: WhiteSmoke;'>ENGLISH</button>
+            </div>
+            <div class="btn_group" id="btn_group" style="margin-top:10px;">
+                <button type='button' class='btn btn-default version_btn' id='News' style='background-color: WhiteSmoke;'>NEWS</button>
+                <button type='button' class='btn btn-default version_btn' id='Ptt' style='background-color: WhiteSmoke;'>PTT</button>
+				<button type='button' class='btn btn-default version_btn' id='Forum' style='background-color: WhiteSmoke;'>FORUM</button>
+				<button type='button' class='btn btn-default version_btn' id='Paper' style='background-color: WhiteSmoke;'>PAPER</button>
+                <button type='button' class='btn btn-default version_btn' id='General' style='background-color: WhiteSmoke;'>GENERAL</button>
+            </div>
+        </div>
+        <div id="show_table" style="margin-top:10px;">
+            <table border=0 style='table-layout:fixed;word-wrap:break-all;'>
+			<tr><td colspan="2">No.1<p id="url_1"></p></td></tr>
+			<tr><td colspan="2"><input type="text" id="no1_id" size="20%" style='margin-left:50px;display:none;'/></td></tr>
+			<tr><td rowspan="6" height="400px"><iframe width="800px" height="400px" id="iframe1" sandbox="allow-same-origin allow-scripts" class="thumbnail"></iframe></td>
+			<td align='left' valign='middle' width="300px"><input type='radio' name='no1' required='required' value='1' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no1_1"><label for="no1_1">&ensp;其他&emsp;&emsp;&ensp;others</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no1' value='2' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no1_2"><label for="no1_2">&ensp;人工智慧&ensp;ai</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no1' value='3' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no1_3"><label for="no1_3">&ensp;物聯網&emsp;&ensp;internet of things</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no1' value='4' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no1_4"><label for="no1_4">&ensp;先進材料&ensp;advanced materials</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no1' value='5' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no1_5"><label for="no1_5">&ensp;量子電腦&ensp;quantum computer</label></td></tr>
+            <tr><td align='left' valign='middle' width="300px"><input type='radio' name='no1' value='6' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no1_6"><label for="no1_6">&ensp;台塑&emsp;&emsp;&ensp;formosa plastics</label></td></tr>
+			<tr><td colspan="2">No.2<p id="url_2"></p></td></tr>
+			<tr><td colspan="2"><input type="text" id="no2_id" size="20%" style='margin-left:50px;display:none;'/></td></tr>
+			<tr><td rowspan="6" height="400px"><iframe width="800px" height="400px" id="iframe2" sandbox="allow-same-origin allow-scripts" class="thumbnail"></iframe></td>
+			<td align='left' valign='middle' width="300px"><input type='radio' name='no2' required='required' value='1' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no2_1"><label for="no2_1">&ensp;其他&emsp;&emsp;&ensp;others</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no2' value='2' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no2_2"><label for="no2_2">&ensp;人工智慧&ensp;ai</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no2' value='3' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no2_3"><label for="no2_3">&ensp;物聯網&emsp;&ensp;internet of things</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no2' value='4' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no2_4"><label for="no2_4">&ensp;先進材料&ensp;advanced materials</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no2' value='5' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no2_5"><label for="no2_5">&ensp;量子電腦&ensp;quantum computer</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no2' value='6' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no2_6"><label for="no2_6">&ensp;台塑&emsp;&emsp;&ensp;formosa plastics</label></td></tr>
+			<tr><td colspan="2">No.3<p id="url_3"></p></td></tr>
+			<tr><td colspan="2"><input type="text" id="no3_id" size="20%" style='margin-left:50px;display:none;'/></td></tr>
+			<tr><td rowspan="6" height="400px"><iframe width="800px" height="400px" id="iframe3" sandbox="allow-same-origin allow-scripts" class="thumbnail"></iframe></td>
+			<td align='left' valign='middle' width="300px"><input type='radio' name='no3' required='required' value='1' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no3_1"><label for="no3_1">&ensp;其他&emsp;&emsp;&ensp;others</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no3' value='2' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no3_2"><label for="no3_2">&ensp;人工智慧&ensp;ai</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no3' value='3' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no3_3"><label for="no3_3">&ensp;物聯網&emsp;&ensp;internet of things</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no3' value='4' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no3_4"><label for="no3_4">&ensp;先進材料&ensp;advanced materials</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no3' value='5' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no3_5"><label for="no3_5">&ensp;量子電腦&ensp;quantum computer</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no3' value='6' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no3_6"><label for="no3_6">&ensp;台塑&emsp;&emsp;&ensp;formosa plastics</label></td></tr>
+			<tr><td colspan="2">No.4<p id="url_4"></p></td></tr>
+			<tr><td colspan="2"><input type="text" id="no4_id" size="20%" style='margin-left:50px;display:none;'/></td></tr>
+			<tr><td rowspan="6" height="400px"><iframe width="800px" height="400px" id="iframe4" sandbox="allow-same-origin allow-scripts" class="thumbnail"></iframe></td>
+			<td align='left' valign='middle' width="300px"><input type='radio' name='no4' required='required' value='1' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no4_1"><label for="no4_1">&ensp;其他&emsp;&emsp;&ensp;others</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no4' value='2' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no4_2"><label for="no4_2">&ensp;人工智慧&ensp;ai</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no4' value='3' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no4_3"><label for="no4_3">&ensp;物聯網&emsp;&ensp;internet of things</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no4' value='4' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no4_4"><label for="no4_4">&ensp;先進材料&ensp;advanced materials</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no4' value='5' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no4_5"><label for="no4_5">&ensp;量子電腦&ensp;quantum computer</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no4' value='6' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no4_6"><label for="no4_6">&ensp;台塑&emsp;&emsp;&ensp;formosa plastics</label></td></tr>
+			<tr><td colspan="2">No.5<p id="url_5"></p></td></tr>
+			<tr><td colspan="2"><input type="text" id="no5_id" size="20%" style='margin-left:50px;display:none;'/></td></tr>
+			<tr><td rowspan="6" height="400px"><iframe width="800px" height="400px" id="iframe5" sandbox="allow-same-origin allow-scripts" class="thumbnail"></iframe></td>
+			<td align='left' valign='middle' width="300px"><input type='radio' name='no5' required='required' value='1' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no5_1"><label for="no5_1">&ensp;其他&emsp;&emsp;&ensp;others</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no5' value='2' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no5_2"><label for="no5_2">&ensp;人工智慧&ensp;ai</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no5' value='3' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no5_3"><label for="no5_3">&ensp;物聯網&emsp;&ensp;internet of things</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no5' value='4' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no5_4"><label for="no5_4">&ensp;先進材料&ensp;advanced materials</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no5' value='5' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no5_5"><label for="no5_5">&ensp;量子電腦&ensp;quantum computer</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no5' value='6' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no5_6"><label for="no5_6">&ensp;台塑&emsp;&emsp;&ensp;formosa plastics</label></td></tr>
+			<tr><td colspan="2">No.6<p id="url_6"></p></td></tr>
+			<tr><td colspan="2"><input type="text" id="no6_id" size="20%" style='margin-left:50px;display:none;'/></td></tr>
+			<tr><td rowspan="6" height="400px"><iframe width="800px" height="400px" id="iframe6" sandbox="allow-same-origin allow-scripts" class="thumbnail"></iframe></td>
+			<td align='left' valign='middle' width="300px"><input type='radio' name='no6' required='required' value='1' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no6_1"><label for="no6_1">&ensp;其他&emsp;&emsp;&ensp;others</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no6' value='2' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no6_2"><label for="no6_2">&ensp;人工智慧&ensp;ai</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no6' value='3' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no6_3"><label for="no6_3">&ensp;物聯網&emsp;&ensp;internet of things</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no6' value='4' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no6_4"><label for="no6_4">&ensp;先進材料&ensp;advanced materials</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no6' value='5' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no6_5"><label for="no6_5">&ensp;量子電腦&ensp;quantum computer</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no6' value='6' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no6_6"><label for="no6_6">&ensp;台塑&emsp;&emsp;&ensp;formosa plastics</label></td></tr>
+			<tr><td colspan="2">No.7<p id="url_7"></p></td></tr>
+			<tr><td colspan="2"><input type="text" id="no7_id" size="20%" style='margin-left:50px;display:none;'/></td></tr>
+			<tr><td rowspan="6" height="400px"><iframe width="800px" height="400px" id="iframe7" sandbox="allow-same-origin allow-scripts" class="thumbnail"></iframe></td>
+			<td align='left' valign='middle' width="300px"><input type='radio' name='no7' required='required' value='1' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no7_1"><label for="no7_1">&ensp;其他&emsp;&emsp;&ensp;others</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no7' value='2' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no7_2"><label for="no7_2">&ensp;人工智慧&ensp;ai</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no7' value='3' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no7_3"><label for="no7_3">&ensp;物聯網&emsp;&ensp;internet of things</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no7' value='4' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no7_4"><label for="no7_4">&ensp;先進材料&ensp;advanced materials</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no7' value='5' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no7_5"><label for="no7_5">&ensp;量子電腦&ensp;quantum computer</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no7' value='6' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no7_6"><label for="no7_6">&ensp;台塑&emsp;&emsp;&ensp;formosa plastics</label></td></tr>
+			<tr><td colspan="2">No.8<p id="url_8"></p></td></tr>
+			<tr><td colspan="2"><input type="text" id="no8_id" size="20%" style='margin-left:50px;display:none;'/></td></tr>
+			<tr><td rowspan="6" height="400px"><iframe width="800px" height="400px" id="iframe8" sandbox="allow-same-origin allow-scripts" class="thumbnail"></iframe></td>
+			<td align='left' valign='middle' width="300px"><input type='radio' name='no8' required='required' value='1' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no8_1"><label for="no8_1">&ensp;其他&emsp;&emsp;&ensp;others</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no8' value='2' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no8_2"><label for="no8_2">&ensp;人工智慧&ensp;ai</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no8' value='3' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no8_3"><label for="no8_3">&ensp;物聯網&emsp;&ensp;internet of things</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no8' value='4' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no8_4"><label for="no8_4">&ensp;先進材料&ensp;advanced materials</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no8' value='5' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no8_5"><label for="no8_5">&ensp;量子電腦&ensp;quantum computer</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no8' value='6' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no8_6"><label for="no8_6">&ensp;台塑&emsp;&emsp;&ensp;formosa plastics</label></td></tr>
+			<tr><td colspan="2">No.9<p id="url_9"></p></td></tr>
+			<tr><td colspan="2"><input type="text" id="no9_id" size="20%" style='margin-left:50px;display:none;'/></td></tr>
+			<tr><td rowspan="6" height="400px"><iframe width="800px" height="400px" id="iframe9" sandbox="allow-same-origin allow-scripts" class="thumbnail"></iframe></td>
+			<td align='left' valign='middle' width="300px"><input type='radio' name='no9' required='required' value='1' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no9_1"><label for="no9_1">&ensp;其他&emsp;&emsp;&ensp;others</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no9' value='2' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no9_2"><label for="no9_2">&ensp;人工智慧&ensp;ai</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no9' value='3' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no9_3"><label for="no9_3">&ensp;物聯網&emsp;&ensp;internet of things</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no9' value='4' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no9_4"><label for="no9_4">&ensp;先進材料&ensp;advanced materials</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no9' value='5' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no9_5"><label for="no9_5">&ensp;量子電腦&ensp;quantum computer</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no9' value='6' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no9_6"><label for="no9_6">&ensp;台塑&emsp;&emsp;&ensp;formosa plastics</label></td></tr>
+			<tr><td colspan="2">No.10<p id="url_10"></p></td></tr>
+			<tr><td colspan="2"><input type="text" id="no10_id" size="20%" style='margin-left:50px;display:none;'/></td></tr>
+			<tr><td rowspan="6" height="400px"><iframe width="800px" height="400px" id="iframe10" sandbox="allow-same-origin allow-scripts" class="thumbnail"></iframe></td>
+			<td align='left' valign='middle' width="300px"><input type='radio' name='no10' required='required' value='1' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no10_1"><label for="no10_1">&ensp;其他&emsp;&emsp;&ensp;others</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no10' value='2' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no10_2"><label for="no10_2">&ensp;人工智慧&ensp;ai</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no10' value='3' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no10_3"><label for="no10_3">&ensp;物聯網&emsp;&ensp;internet of things</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no10' value='4' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no10_4"><label for="no10_4">&ensp;先進材料&ensp;advanced materials</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no10' value='5' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no10_5"><label for="no10_5">&ensp;量子電腦&ensp;quantum computer</label></td></tr>
+			<tr><td align='left' valign='middle' width="300px"><input type='radio' name='no10' value='6' style='margin-left:50px;WIDTH:15px; HEIGHT:15px' id="no10_6"><label for="no10_6">&ensp;台塑&emsp;&emsp;&ensp;formosa plastics</label></td></tr>
+			<tr><td colspan="2" align="center"><a class="btn btn-primary" id="btnfinish">送出</a></td></tr>
+			</table>
+            </p>
+        </div>
+		
+		
+        <script>
+			var version_id=0;
+			var language_id=0;
+            
+            $(document).ready(function () {
+                version_id="News";
+				$('#News').css("background", "SkyBlue");
+				language_id="ZH";
+				$('#ZH').css("background", "SkyBlue");
+				getLink(version_id,language_id);
+				
+                    
+            });
+            $(document).on('click', '.version_btn', function (event) {
+                $('#' + version_id).css("background", "WhiteSmoke");
+                $(this).css("background", "SkyBlue");
+                version_id = this.id;
+                getLink(version_id,language_id);
+			});
+			$(document).on('click', '.language_version_btn', function (event) {
+                $('#' + language_id).css("background", "WhiteSmoke");
+                $(this).css("background", "SkyBlue");
+                language_id = this.id;
+                getLink(version_id,language_id);
+			});
+			function getLink(collection, language) {
+				$.ajax({
+					type: "POST",
+					url: "AI_mark.php",
+					dataType: "json",
+					data: {
+						action: "select",
+						Collection: collection,
+						Language: language
+					},
+					beforeSend: function () {
+						$('#loading').show();
+					},
+					complete: function () {
+						$('#loading').hide();
+					},
+					success: function (data) {
+						if (data.isSuccess) {
+							if(data.out.length==0){
+								document.getElementById("show_table").style.display="none";
+								alert("There is no data.\n沒有資料需要被標註")
+							}
+							else{
+								for (var i = 0; i < data.out.length; i++) {
+									document.getElementById("show_table").style.display="";
+									var data_array = data.out[i];
+									var sno_institute = data_array['sno_institute'];
+									var ID = data_array['ID'];
+									var link = data_array['Link'];
+									var title = data_array['Title'];
+									var index=i+1;
+									//document.getElementById("iframe"+index).contentWindow.location.reload();
+									document.getElementById("iframe"+index).src="http://spark5.widelab.org/~csie062452/tsaichen/AI_mark/HTML/"+index+".html";
+									document.getElementById("no"+index+"_id").value=ID;
+									console.log(ID);
+									document.getElementById("url_"+index).innerHTML="<a href='"+link+"' target='_blank'>"+title+"</a>";
+								}
+							}
+							
+						}
+					},
+					error: function (XMLHttpRequest, textStatus, errorThrown) {
+						alert(XMLHttpRequest.readyState + XMLHttpRequest.status + XMLHttpRequest.responseText);
+					}
+				})
+			}
+
+			$(document).on('click', '#btnfinish', function (event) {
+				var label_ID = [];
+				var label_value = [];
+				for(var i=1;i<11;i++){
+					if ($('input[name="no'+i+'"]:checked').val() == null) {
+						alert("Please select the type of article No."+i+".");
+						return false;
+					}
+				}
+				for(var i=1;i<11;i++){
+					label_ID.push(document.getElementById("no"+i+"_id").value);
+					label_value.push($('input[name="no'+i+'"]:checked').val());
+				}
+				$.ajax({
+					type: "POST",
+					url: "AI_mark.php",
+					dataType: "json",
+					data: {
+						action: "update",
+						Collection: version_id,
+						label_ID: label_ID,
+						label_value: label_value
+					},
+					success: function (data) {
+						if (data.isSuccess) {
+							alert("標註成功!");
+							for(var i=1;i<11;i++){
+								document.getElementById("no"+i+"_id").value="";
+								var radio = document.getElementsByName("no"+i);
+								for(var j=0;j<radio.length;j++){
+									radio[j].checked = false;
+								}
+                            }
+				            getLink(version_id,language_id);
+						}
+					},
+					error: function (XMLHttpRequest, textStatus, errorThrown) {
+						alert(XMLHttpRequest.readyState + XMLHttpRequest.status + XMLHttpRequest.responseText);
+					}
+				})
+                
+			});
+        </script>
+  </body>
+  
+</html>
+
